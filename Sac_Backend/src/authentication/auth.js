@@ -16,6 +16,7 @@ function Jwtverify(token){
     var send;
     jwt.verify(arr[1], secretKey, (err, decoded) => {
         if (err) {
+            console.log(arr)
           send={message:"not valid token"};
           
         } else {

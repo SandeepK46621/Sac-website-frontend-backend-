@@ -7,16 +7,18 @@ const {headerVerify} = require("../../midlewares/midleware");
 
 // adds the contents to Memberss database
 router.post("/add",headerVerify,async(req,res)=>{
-    const {name,position,contact}= req.body;
+    console.log("add members Hiting ")
+    const {name,position,imageurl}= req.body;
+    console.log(name,position,imageurl);
     const Members_obj= new Members({
-        name,position,contact
+        name,position,imageurl
     });
     await Members_obj.save();
     res.json({message:"Added Members"});
 });
 
 //delete the Members
-router.delete("/delete:id",headerVerify,async(req,res)=>{
+router.delete("/delete/:id",headerVerify,async(req,res)=>{
     try{
         await Members.deleteOne({_id:req.params.id});
         res.json({message:"deleted Members"})
@@ -27,7 +29,7 @@ router.delete("/delete:id",headerVerify,async(req,res)=>{
 });
 
 // updating the Members 
-router.put("/update:id",headerVerify,async(req,res)=>{
+router.put("/update/:id",headerVerify,async(req,res)=>{
     try{
         const updateMembers = await Members.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         if(updateMembers){

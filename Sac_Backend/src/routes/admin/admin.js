@@ -1,6 +1,6 @@
 const express = require("express");
 const router= express.Router();
-const {Event, Gallery, Admin , Members, News}= require("../../database/db");
+const {Admin }= require("../../database/db");
 const {checkAdmin,checkregisternationAdmin,headerVerify} = require("../../midlewares/midleware");
 const {Jwtmaker, Jwtverify} = require("../../authentication/auth")
 const event= require("./events")
@@ -8,13 +8,14 @@ const gallery= require("./gallery")
 const members= require("./members")
 const news= require("./news")
 
-app.use('/events',event);
-app.use('/gallery',gallery);
-app.use('/members',members);
-app.use('/news',news);
+router.use('/events',event);
+router.use('/gallery',gallery);
+router.use('/members',members);
+router.use('/news',news);
 
 // registeration for new Admin
 router.post("/register",checkregisternationAdmin,async(req,res)=>{
+    console.log(req.body)
     const {username,password,name,position,email, phone}= req.body ;
     const adminobj = new Admin({
         username, password ,name ,position,email,phone

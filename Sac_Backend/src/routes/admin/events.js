@@ -7,16 +7,16 @@ const {headerVerify} = require("../../midlewares/midleware");
 
 // adds the contents to events database
 router.post("/add",headerVerify,async(req,res)=>{
-    const {title,description,date}= req.body;
+    const {title,description,imageurl}= req.body;
     const event_obj= new Event({
-        title,description,date
+        title,description,imageurl
     });
     await event_obj.save();
     res.json({message:"Added event"});
 });
 
 //delete the events 
-router.delete("/delete:id",headerVerify,async(req,res)=>{
+router.delete("/delete/:id",headerVerify,async(req,res)=>{
     try{
         await Event.deleteOne({_id:req.params.id});
         res.json({message:"deleted event"})
@@ -27,7 +27,7 @@ router.delete("/delete:id",headerVerify,async(req,res)=>{
 });
 
 // updating the event 
-router.put("/update:id",headerVerify,async(req,res)=>{
+router.put("/update/:id",headerVerify,async(req,res)=>{
     try{
         const updateEvent = await Event.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         if(updateEvent){

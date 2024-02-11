@@ -16,7 +16,7 @@ router.post("/add",headerVerify,async(req,res)=>{
 });
 
 //delete the newss 
-router.delete("/delete:id",headerVerify,async(req,res)=>{
+router.delete("/delete/:id",headerVerify,async(req,res)=>{
     try{
         await News.deleteOne({_id:req.params.id});
         res.json({message:"deleted news"})
@@ -27,7 +27,7 @@ router.delete("/delete:id",headerVerify,async(req,res)=>{
 });
 
 // updating the news 
-router.put("/update:id",headerVerify,async(req,res)=>{
+router.put("/update/:id",headerVerify,async(req,res)=>{
     try{
         const updatenews = await News.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         if(updatenews){

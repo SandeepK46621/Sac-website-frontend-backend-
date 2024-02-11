@@ -16,7 +16,7 @@ router.post("/add",headerVerify,async(req,res)=>{
 });
 
 //delete the gallerys 
-router.delete("/delete:id",headerVerify,async(req,res)=>{
+router.delete("/delete/:id",headerVerify,async(req,res)=>{
     try{
         await Gallery.deleteOne({_id:req.params.id});
         res.json({message:"deleted image"})
@@ -27,7 +27,7 @@ router.delete("/delete:id",headerVerify,async(req,res)=>{
 });
 
 // updating the gallery 
-router.put("/update:id",headerVerify,async(req,res)=>{
+router.put("/update/:id",headerVerify,async(req,res)=>{
     try{
         const updategallery = await Gallery.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
         if(updategallery){
