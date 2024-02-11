@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/admin", adminRoute);
 
-mongoose.connect("mongodb+srv://sandeep46621:w5tqFtSvAoG8T5v2@cluster0.dmocucf.mongodb.net/Sac",{  useNewUrlParser: false,useUnifiedTopology: true,})
+mongoose.connect("Put the mongodb port or server link ",{  useNewUrlParser: false,useUnifiedTopology: true,})
 
 
 app.get("/gallery",async(req,res)=>{ 
